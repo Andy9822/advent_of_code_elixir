@@ -1,5 +1,5 @@
 defmodule Day3 do
-  @spec process([String.t()], number(), number()) :: non_neg_integer()
+  @spec process([[String.t()]], number(), number()) :: non_neg_integer()
   def process(lines, right, down) do
     line_length = lines |> Enum.at(0) |> length()
 
