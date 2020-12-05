@@ -53,21 +53,17 @@ defmodule Day4 do
   def is_valid_hgt?(input) do
     re = ~r/^(\d+)(cm|in)$/
 
-    case String.match?(input, re) do
-      true ->
-        [digit_str, unit] = Regex.run(re, input, capture: :all_but_first)
-        digit = String.to_integer(digit_str)
+    with [digit_str, unit] <- Regex.run(re, input, capture: :all_but_first) do
+      digit = String.to_integer(digit_str)
 
-        case unit do
-          "cm" -> is_within_range(digit, 150, 193)
-          "in" -> is_within_range(digit, 59, 76)
-          _ -> false
-        end
-
-      _ ->
-        false
+      case unit do
+        "cm" -> is_within_range(digit, 150, 193)
+        "in" -> is_within_range(digit, 59, 76)
+        _ -> false
+      end
     end
   end
+
   # ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
   def is_valid_ecl?(ecl), do: ecl in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
   # hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
